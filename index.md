@@ -221,6 +221,8 @@ Figpack Slides is highly customizable. You can modify the `create_slide.py` scri
 
 See the README.md file for instructions on how to develop and build your presentation.
 
+---
+
 # Hosting on GitHub Pages
 
 Once you have your presentation built, you can host it on GitHub Pages for free.
