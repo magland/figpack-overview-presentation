@@ -1,10 +1,10 @@
 # Figpack Slides Demo Presentation
 
-slide-type <- title
-
-subtitle <- How to create an interactive slide presentation using figpack_slides
-
-author <- Jeremy Magland, Center for Computational Mathematics, Flatiron Institute
+```yaml slide-metadata
+slide-type: title
+subtitle: How to create an interactive slide presentation using figpack_slides
+author: Jeremy Magland, Center for Computational Mathematics, Flatiron Institute
+```
 
 ---
 
@@ -39,7 +39,7 @@ A Python package for interactive scientific visualization and data analysis.
 
 See [the documentation](https://flatironinstitute.github.io/figpack/) for more details.
 
-section-break
+* * *
 
 ### What is Figpack Slides?
 
@@ -76,9 +76,11 @@ The index.md file serves as the backbone of your presentation. It contains the c
 
 In a perverse way, the content of this file is on the right side of this slide! So, you should be able to see how this slide in particular was constructed. :)
 
-section-break
+* * *
 
-markdown-as-text <- true
+```yaml section-metadata
+markdown-as-text: true
+```
 
 ./index.md
 
@@ -87,9 +89,9 @@ markdown-as-text <- true
 # Rules for Slides
 
 * Slides are separated by `---` lines.
-* An optional slide type is specified at the top of each slide using the syntax `slide-type <- <type>`.
-* The content of each slide is split into one or more sections using `section-break` lines.
-* Each section can contain metadata at the top, specified using the syntax `key <- value`.
+* An optional slide type is specified at the top of each slide using the ````yaml slide-metadata ... ``` syntax.
+* The content of each slide is split into one or more sections using `* * *` lines (three asterisks).
+* Each section can contain metadata at the top, specified using the ````yaml section-metadata ... ``` syntax.
 * If slide-type is "title", then the slide will expect subtitle and author metadata as well.
 * By default, if two sections are present, the first will be on the left and the second on the right.
 * If a section is a single `![alt text](image_path)` line, it will be treated as an image and sized to fill the section.
@@ -101,25 +103,33 @@ markdown-as-text <- true
 
 # Tabs
 
-slide-type <- tabs-on-right
+```yaml slide-metadata
+slide-type: tabs-on-right
+```
 
 This slide showcases the "tabs-on-right" slide type. In this case we have four sections. The first section corresponds to the main content on the left side. The other three sections correspond to tabs on the right side.
 
-section-break
+* * *
 
-tab-label <- Tab 1
+```yaml section-metadata
+tab-label: Main
+```
 
 This is the first tab
 
-section-break
+* * *
 
-tab-label <- Tab 2
+```yaml section-metadata
+tab-label: Tab 2
+```
 
 This is the second tab
 
-section-break
+* * *
 
-tab-label <- Tab 3
+```yaml section-metadata
+tab-label: Tab 3
+```
 
 This is the third tab
 
@@ -157,7 +167,7 @@ If that local image is the only content in a section, it will be sized and cente
 
 > Note: Make the browser window smaller to see how the image resizes.
 
-section-break
+* * *
 
 ![Baby hamster](./images/A_hamster_and_a_hamster_wheel.jpeg)
 
@@ -171,7 +181,7 @@ An iframe can be embedded in a section using the syntax
 <iframe src="url"></iframe>
 ```
 
-section-break
+* * *
 
 <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe>
 
@@ -191,7 +201,7 @@ For example, this slide includes the contents of the file `./markdown_files/exam
 
 I got that file [from here](https://jaspervdj.be/lorem-markdownum/).
 
-section-break
+* * *
 
 ./markdown_files/example_markdown.md
 
@@ -201,13 +211,15 @@ section-break
 
 You can embed [arbitrary Figpack views](https://flatironinstitute.github.io/figpack) that are defined in Python.
 
-In this case, the section on the right has only the line `"figpack-view-example <- example-1"`
+In this case, the section on the right has no content, but it has metadata specifying a custom Figpack view.
 
 Then, this is handled in the `create_slide.py` script to generate a custom Figpack view.
 
-section-break
+* * *
 
-figpack-view-example <- example-1
+```yaml section-metadata
+figpack-view-example: example-1
+```
 
 ---
 

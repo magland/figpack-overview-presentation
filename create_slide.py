@@ -126,7 +126,7 @@ def create_title_slide(
     if len(parsed_slide.sections) != 1:
         raise ValueError("Title slide must have exactly one section.")
     section = parsed_slide.sections[0]
-    metadata = section.metadata
+    metadata = parsed_slide.metadata
     subtitle = metadata.get("subtitle", "")
     author = metadata.get("author", "")
 
@@ -177,7 +177,7 @@ def process_section(section: fps.ParsedSlideSection):
             url = match.group(1)
             return fpv.Iframe(url=url)
         else:
-            return fpv.Markdown(
+            return fpsv.Markdown(
                 "Error: Invalid iframe tag - no src attribute found", font_size=28
             )
 
@@ -196,11 +196,11 @@ def process_section(section: fps.ParsedSlideSection):
             # Embed images as base64
             md_content_with_images = fps.embed_images_as_base64(md_content, base_dir)
 
-            return fpv.Markdown(md_content_with_images, font_size=standard_slide_external_markdown_font_size)
+            return fpsv.Markdown(md_content_with_images, font_size=standard_slide_external_markdown_font_size)
         except FileNotFoundError:
-            return fpv.Markdown(f"Error: File not found: {md_file_path}", font_size=28)
+            return fpsv.Markdown(f"Error: File not found: {md_file_path}", font_size=28)
         except Exception as e:
-            return fpv.Markdown(f"Error loading markdown file: {str(e)}", font_size=28)
+            return fpsv.Markdown(f"Error loading markdown file: {str(e)}", font_size=28)
 
     if content.startswith("![") and "](./" in content and content.endswith(")"):
         # This is an image path - extract the path and create an Image view
@@ -210,7 +210,7 @@ def process_section(section: fps.ParsedSlideSection):
     # Regular markdown content - check if it contains images and embed them
     content_with_images = fps.embed_images_as_base64(content, base_dir="./")
     font_size = get_standard_slide_content_font_size(metadata)
-    return fpv.Markdown(content_with_images, font_size=font_size)
+    return fpsv.Markdown(content_with_images, font_size=font_size)
 
 
 def figpack_view_example_1():
