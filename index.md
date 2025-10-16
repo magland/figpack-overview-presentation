@@ -15,6 +15,7 @@ author: Jeremy Magland, Center for Computational Mathematics, Flatiron Institute
 * The main markdown file - index.md
 * Rules for slides
 * Tabs
+* Font sizes
 * Embedding images
 * Embedding iframes
 * Embedding external markdown files
@@ -60,11 +61,9 @@ Here's what you'll see in the template repository:
 build/              # Built presentation (auto-generated, don't edit)
 images/             # Images used in the presentation
 markdown_files/     # Additional markdown files for content
-create_slide.py     # Script to generate an individual slide
 dev.sh              # Script to run in watch mode during development
 index.md            # Main markdown file for the presentation
 index.py            # Script to build the entire presentation
-nodemon.json        # Configuration for nodemon (watch mode)
 README.md           # About this repository
 ```
 
@@ -74,12 +73,12 @@ README.md           # About this repository
 
 The index.md file serves as the backbone of your presentation. It contains the content of your slides, written in markdown format.
 
-In a perverse way, the content of this file is on the right side of this slide! So, you should be able to see how this slide in particular was constructed. :)
+The content of this file is on the right side of this slide! So, you should be able to see how this slide in particular was constructed. :)
 
 * * *
 
 ```yaml section-metadata
-markdown-as-text: true
+markdown-as-text: True
 ```
 
 ./index.md
@@ -97,7 +96,6 @@ markdown-as-text: true
 * If a section is a single `![alt text](image_path)` line, it will be treated as an image and sized to fill the section.
 * If a section is a single `<iframe ...></iframe>` line, it will be treated as an iframe and will be sized to fill the section.
 * If a section is a single `./path/to/file.md` line, it will be treated as a reference to an external markdown file and the contents of that file will be included in the section (scrollable).
-* The `create_slide.py` script can be used to customize all aspects of slide creation including embedding of arbitrary Figpack views.
 
 ---
 
@@ -132,6 +130,69 @@ tab-label: Tab 3
 ```
 
 This is the third tab
+
+---
+
+# Font Sizes
+
+```yaml slide-metadata
+slide-type: tabs-on-right
+```
+
+Font sizes can be controlled using the following section metadata:
+
+```yaml section-metadata
+font-size: small | medium-small | medium | medium-large | large
+```
+
+The default font size is "medium".
+
+See the tabs on the right for examples of different font sizes.
+
+* * *
+
+```yaml section-metadata
+tab-label: Small
+font-size: small
+```
+
+This is small font size.
+
+* * *
+
+```yaml section-metadata
+tab-label: Medium-Small
+font-size: medium-small
+```
+
+This is medium-small font size.
+
+* * *
+
+```yaml section-metadata
+tab-label: Medium
+font-size: medium
+```
+
+This is medium font size.
+
+* * *
+
+```yaml section-metadata
+tab-label: Medium-Large
+font-size: medium-large
+```
+
+This is medium-large font size.
+
+* * *
+
+```yaml section-metadata
+tab-label: Large
+font-size: large
+```
+
+This is large font size.
 
 ---
 
@@ -218,20 +279,19 @@ Then, this is handled in the `create_slide.py` script to generate a custom Figpa
 * * *
 
 ```yaml section-metadata
-figpack-view-example: example-1
+view-type: example-1
+plot-color: "#00B000"
 ```
-
----
-
-# Customization
-
-Figpack Slides is highly customizable. You can modify the `create_slide.py` script to change how slides are generated, add new slide types, or customize the appearance of your presentation.
 
 ---
 
 # Developing and Building
 
-See the README.md file for instructions on how to develop and build your presentation.
+See the README.md file (to the right) for instructions on how to develop and build your presentation.
+
+* * *
+
+./README.md
 
 ---
 
