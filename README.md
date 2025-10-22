@@ -1,6 +1,6 @@
-# Figpack Slides Demo Presentation
+# Figpack Overview Presentation
 
-[View the presentation](https://magland.github.io/figpack-slides-demo-presentation/?slide=1)
+[View the presentation](https://magland.github.io/figpack-overview-presentation/?slide=1)
 
 ## Development
 
