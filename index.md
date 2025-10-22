@@ -439,7 +439,7 @@ font-size: large
 
 In a nutshell:
 * Figpack turns scientific data into shareable, self-contained HTML apps for interactive exploration.
-* Fast, scalable, and extensible — powered by Zarr
-* Works with timeseries, images, plots, and dashboards
-* Easily shared, archived, and extended
+* Fast, scalable, and extensible, powered by Zarr
+* Figures can be created, viewed, shared, managed, and archived
+* Extensible with domain-specific views and custom visualizations
 * Enables open, reproducible, and interactive science
