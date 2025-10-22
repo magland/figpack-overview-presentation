@@ -1,308 +1,445 @@
-# Figpack Slides Demo Presentation
+# Figpack - Portable, Interactive Scientific Visualizations
 
 ```yaml slide-metadata
 slide-type: title
-subtitle: How to create an interactive slide presentation using figpack_slides
+subtitle: Overview and Demonstration for Datajoint, October 2025
 author: Jeremy Magland, Center for Computational Mathematics, Flatiron Institute
 ```
 
 ---
 
-# Outline
-
-* What are Figpack and Figpack Slides?
-* Getting started with Figpack Slides
-* The main markdown file - index.md
-* Rules for slides
-* Tabs
-* Font sizes
-* Embedding images
-* Embedding iframes
-* Embedding external markdown files
-* Custom Figpack views
-* Customization
-* Developing and building
-* Hosting on GitHub Pages
-
----
-
-# Figpack and Figpack Slides
-
-### What is Figpack?
-
-A Python package for interactive scientific visualization and data analysis.
-
-* Exports figures as shareable, self-contained HTML
-* Linked views in customizable dashboards
-* Local or cloud storage options
-* Handles large data via Zarr
-* Built for neurophysiology, useful broadly
-
-See [the documentation](https://flatironinstitute.github.io/figpack/) for more details.
-
-* * *
-
-### What is Figpack Slides?
-
-A Figpack extension for creating interactive slide presentations, like this one!
-
-This presentation will show you how to use Figpack Slides to create your own presentations.
-
----
-
-# Getting Started with Figpack Slides
-
-The first step is to copy (don't fork) this repository as a template for your own presentation.
-
-Here's what you'll see in the template repository:
-
-```bash
-.github/workflows/  # GitHub Actions workflows for automatic deployment
-build/              # Built presentation (auto-generated, don't edit)
-images/             # Images used in the presentation
-markdown_files/     # Additional markdown files for content
-dev.sh              # Script to run in watch mode during development
-index.md            # Main markdown file for the presentation
-index.py            # Script to build the entire presentation
-README.md           # About this repository
-```
-
----
-
-# The main markdown file - index.md
-
-The index.md file serves as the backbone of your presentation. It contains the content of your slides, written in markdown format.
-
-The content of this file is on the right side of this slide! So, you should be able to see how this slide in particular was constructed. :)
-
-* * *
+# Overview
 
 ```yaml section-metadata
-markdown-as-text: True
-```
-
-./index.md
-
----
-
-# Rules for Slides
-
-* Slides are separated by `---` lines.
-* An optional slide type is specified at the top of each slide using the ````yaml slide-metadata ... ``` syntax.
-* The content of each slide is split into one or more sections using `* * *` lines (three asterisks).
-* Each section can contain metadata at the top, specified using the ````yaml section-metadata ... ``` syntax.
-* If slide-type is "title", then the slide will expect subtitle and author metadata as well.
-* By default, if two sections are present, the first will be on the left and the second on the right.
-* If a section is a single `![alt text](image_path)` line, it will be treated as an image and sized to fill the section.
-* If a section is a single `<iframe ...></iframe>` line, it will be treated as an iframe and will be sized to fill the section.
-* If a section is a single `./path/to/file.md` line, it will be treated as a reference to an external markdown file and the contents of that file will be included in the section (scrollable).
-
----
-
-# Tabs
-
-```yaml slide-metadata
-slide-type: tabs-on-right
-```
-
-This slide showcases the "tabs-on-right" slide type. In this case we have four sections. The first section corresponds to the main content on the left side. The other three sections correspond to tabs on the right side.
-
-* * *
-
-```yaml section-metadata
-tab-label: Main
-```
-
-This is the first tab
-
-* * *
-
-```yaml section-metadata
-tab-label: Tab 2
-```
-
-This is the second tab
-
-* * *
-
-```yaml section-metadata
-tab-label: Tab 3
-```
-
-This is the third tab
-
----
-
-# Font Sizes
-
-```yaml slide-metadata
-slide-type: tabs-on-right
-```
-
-Font sizes can be controlled using the following section metadata:
-
-```yaml section-metadata
-font-size: small | medium-small | medium | medium-large | large
-```
-
-The default font size is "medium".
-
-See the tabs on the right for examples of different font sizes.
-
-* * *
-
-```yaml section-metadata
-tab-label: Small
-font-size: small
-```
-
-This is small font size.
-
-* * *
-
-```yaml section-metadata
-tab-label: Medium-Small
-font-size: medium-small
-```
-
-This is medium-small font size.
-
-* * *
-
-```yaml section-metadata
-tab-label: Medium
-font-size: medium
-```
-
-This is medium font size.
-
-* * *
-
-```yaml section-metadata
-tab-label: Medium-Large
-font-size: medium-large
-```
-
-This is medium-large font size.
-
-* * *
-
-```yaml section-metadata
-tab-label: Large
 font-size: large
 ```
 
-This is large font size.
+**Purpose**: Introduce Figpack and attract early adopters and developers.
+
+::: incremental
+* Motivation — Why Figpack? - Limitations of existing tools
+* How Figpack Works - From code to self-contained HTML apps
+* Building a Figure - Create, view, and share visualizations
+* Examples and Layouts - Combine multiple views into dashboards
+* Domain Extensions - e.g. spike sorting with figpack_spike_sorting
+* Performance at Scale - Efficient handling of large, multi-channel data
+* Figure Lifecycle - Uploading, sharing, and managing hosted figures
+* Extending Figpack - Creating your own custom views
+---
+
+```yaml section-metadata
+font-size: large
+```
+
+# Why Figpack?
+
+The challenge:
+::: incremental
+* Static plots are great for papers, but limited for exploring complex data.
+* Interactive plots often require Jupyter notebooks or servers.
+* Sharing rich visualizations is hard — dependencies, data, and formats rarely travel well.
+* Large datasets overwhelm most browser-based tools.
+:::
+
+The Figpack solution:
+::: incremental
+* Self-contained: bundles data + visuals into one portable HTML directory.
+* Fast & scalable: built on Zarr for chunked, compressed, lazy-loaded data access.
+* Flexible: supports many views and layouts — from simple plots to complex dashboards.
+* Collaborative: share a link, no setup needed.
+* Archivable: easily stored as .tar.gz or integrated into data repositories.
+* Extensible: add custom or domain-specific view types.
+:::
 
 ---
 
-# Embedding Images
+# Creating a Figpack Figure
 
-A remote image can be embedded in the markdown using the syntax
-
-```
-![alt text](image_url)
-```
-
-![Baby hamster](https://upload.wikimedia.org/wikipedia/commons/9/99/Babyhamster-scottobear.jpg)
-
----
-
-# Embedding Local Images
-
-A local image can be embedded using the syntax
-
-```
-![alt text](./images/image_filename.png)
+```bash
+# Install figpack
+pip install figpack
 ```
 
-Don't forget to include the "./" at the beginning of the path!
+```python
+import numpy as np
+import figpack.views as fp
 
-![A hamster and a hamster wheel](./images/A_hamster_and_a_hamster_wheel.jpeg)
-
----
-
-# Embedding Local Images
-
-If that local image is the only content in a section, it will be sized and centered according to the section size. For example, this slide contains only an image on the right side.
-
-> Note: Make the browser window smaller to see how the image resizes.
-
-* * *
-
-![Baby hamster](./images/A_hamster_and_a_hamster_wheel.jpeg)
-
----
-
-# Embedding Iframes
-
-An iframe can be embedded in a section using the syntax
-
-```
-<iframe src="url"></iframe>
+view = fp.TimeseriesGraph(y_label="Signal")
+t = np.linspace(0, 10, 1000)
+y = np.sin(2 * np.pi * t) * np.exp(-t / 3.2)
+view.add_line_series(name="sine wave", t=t, y=y, color="blue")
+view.show(
+    upload=True,
+    open_in_browser=True,
+    title="Quick Start Example"
+)
 ```
 
-* * *
+Or to upload to the cloud for sharing:
 
-<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe>
-
----
-
-# Embedding External Markdown Files
-
-A markdown file can be embedded in a section using the syntax
-
-```
-./path/to/file.md
+```python
+view.show(
+    upload=True,
+    title="Quick Start Example"
+)
 ```
 
-That must be the only content in the section.
-
-For example, this slide includes the contents of the file `./markdown_files/example_markdown.md` on the right side.
-
-I got that file [from here](https://jaspervdj.be/lorem-markdownum/).
-
-* * *
-
-./markdown_files/example_markdown.md
-
----
-
-# Custom Figpack Views
-
-You can embed [arbitrary Figpack views](https://flatironinstitute.github.io/figpack) that are defined in Python.
-
-In this case, the section on the right has no content, but it has metadata specifying a custom Figpack view.
-
-Then, this is handled in the `create_slide.py` script to generate a custom Figpack view.
+Must set the `FIGPACK_API_KEY` environment variable.
 
 * * *
 
 ```yaml section-metadata
-view-type: example-1
-plot-color: "#00B000"
+view-type: execute-view
+caption: This is the view that appears in the browser.
+font-size: 30
+```
+
+```python
+# This code gets executed to generate the plot
+import numpy as np
+import figpack.views as fp
+
+view = fp.TimeseriesGraph(y_label="Signal")
+t = np.linspace(0, 10, 1000)
+y = np.sin(2 * np.pi * t) * np.exp(-t / 3)
+view.add_line_series(
+    name="sine wave",
+    t=t, y=y,
+    color="blue"
+)
 ```
 
 ---
 
-# Developing and Building
+# How Figpack Displays A Figure
 
-See the README.md file (to the right) for instructions on how to develop and build your presentation.
+```yaml section-metadata
+font-size: large
+```
+
+`show()` creates a figure directory on disk
+
+The directory contains:
+
+* **index.html** – the interactive viewer
+* **JavaScript and CSS assets** – the rendering engine
+* **data.zarr/** – the serialized figure data
+
+Together, these make a self-contained web app
+
+Starts up a lightweight HTTP server to serve the files
+
+Optionally upload to cloud for sharing
+
+(This presentation is itself a Figpack figure!)
 
 * * *
 
-./README.md
+![Create Figure Diagram](./images/create-figure-diagram.png)
 
 ---
 
-# Hosting on GitHub Pages
+# Creating a Figure
 
-Once you have your presentation built, you can host it on GitHub Pages for free.
+<iframe src="https://users.flatironinstitute.org/~magland/screencasts/presentations/figpack-presentation/figpack-upload-figure-screencast.webm"></iframe>
 
-1. Push this repository to GitHub.
-2. In the repository settings, configure Pages so that it is built using GitHub Actions.
+---
 
-That's it! Your presentation will be automatically built and hosted on GitHub Pages whenever you push changes to the repository.
+# Examples: Markdown and Image Views
+
+<iframe src="https://flatironinstitute.github.io/figpack/basic_views_tutorial.html?embed=true#markdown-view"></iframe>
+
+* * *
+
+<iframe src="https://flatironinstitute.github.io/figpack/basic_views_tutorial.html?embed=true#image-view"></iframe>
+
+---
+
+# Examples: TimeseriesGraph
+
+<iframe src="https://flatironinstitute.github.io/figpack/basic_views_tutorial.html?embed=true#simple-timeseriesgraph"></iframe>
+
+* * *
+
+<iframe src="https://flatironinstitute.github.io/figpack/basic_views_tutorial.html?embed=true#multiple-series"></iframe>
+
+---
+
+# Handling Large Data Efficiently
+
+```yaml section-metadata
+font-size: large
+```
+
+::: incremental
+* Data stored in Zarr format — chunked, compressed, and lazily loaded.
+* Enables interactive visualization of very large datasets.
+* Supports hierarchical downsampling for smooth zooming and navigation.
+* Only the visible data range is loaded into the browser.
+* Works seamlessly for local or cloud-hosted figures.
+:::
+
+* * *
+
+<iframe src="https://flatironinstitute.github.io/figpack/basic_views_tutorial.html?embed=true#uniform-timeseries"></iframe>
+
+---
+
+# Examples: Matplotlib and Plotly Views
+
+<iframe src="https://flatironinstitute.github.io/figpack/basic_views_tutorial.html?embed=true#matplotlib-integration"></iframe>
+
+* * *
+
+<iframe src="https://flatironinstitute.github.io/figpack/basic_views_tutorial.html?embed=true#plotly-integration"></iframe>
+
+---
+
+# Example: DataFrame View
+
+```yaml section-metadata
+font-size: large
+```
+
+Wrap a Pandas DataFrame for interactive viewing of tabular data.
+
+* * *
+
+<iframe src="https://flatironinstitute.github.io/figpack/basic_views_tutorial.html?embed=true#dataframe-view"></iframe>
+
+---
 
 
+# Composing Views and Layouts
 
+```yaml slide-metadata
+slide-type: tabs-on-right
+```
+
+Views are the basic visualization units — e.g. TimeseriesGraph, Image, Markdown.
+
+Layouts arrange and synchronize multiple views into dashboards.
+
+Common layout types:
+
+* **Box** – stack views vertically or horizontally
+* **TabLayout** – switch between tabs
+* **Splitter** – resizable panels
+
+Views in a layout share state (e.g. time range, selected units).
+
+Layouts can be nested and displayed with a single show() call.
+
+* * *
+
+```yaml section-metadata
+tab-label: Box Layout
+```
+
+<iframe src="https://flatironinstitute.github.io/figpack/basic_views_tutorial.html?embed=true#box-layout"></iframe>
+
+* * *
+
+```yaml section-metadata
+tab-label: Tab Layout
+```
+
+<iframe src="https://flatironinstitute.github.io/figpack/basic_views_tutorial.html?embed=true#tablayout"></iframe>
+
+* * *
+
+```yaml section-metadata
+tab-label: Splitter Layout
+```
+
+<iframe src="https://flatironinstitute.github.io/figpack/basic_views_tutorial.html?embed=true#splitter-layout"></iframe>
+
+* * *
+
+```yaml section-metadata
+tab-label: Complex Nested Layout
+```
+
+<iframe src="https://flatironinstitute.github.io/figpack/basic_views_tutorial.html?embed=true#complex-nested-layout"></iframe>
+
+---
+
+# Domain-specific Extension: Spike Sorting
+
+```yaml slide-metadata
+slide-type: tabs-on-right
+```
+
+Figpack has extension packages for domain-specific visualizations.
+
+```bash
+pip install figpack_spike_sorting
+```
+
+* * *
+
+```yaml section-metadata
+tab-label: Units Table
+```
+
+<iframe src="https://flatironinstitute.github.io/figpack/spike_sorting_tutorial.html?embed=true#units-table"></iframe>
+
+* * *
+
+```yaml section-metadata
+tab-label: Unit Metrics
+```
+
+<iframe src="https://flatironinstitute.github.io/figpack/spike_sorting_tutorial.html?embed=true#unit-metrics-graph"></iframe>
+
+* * *
+
+```yaml section-metadata
+tab-label: Raster Plot
+```
+
+<iframe src="https://flatironinstitute.github.io/figpack/spike_sorting_tutorial.html?embed=true#raster-plot"></iframe>
+
+* * *
+
+```yaml section-metadata
+tab-label: Spike Amplitudes
+```
+
+<iframe src="https://flatironinstitute.github.io/figpack/spike_sorting_tutorial.html?embed=true#spike-amplitudes"></iframe>
+
+* * *
+
+```yaml section-metadata
+tab-label: Average Waveforms
+```
+
+<iframe src="https://flatironinstitute.github.io/figpack/spike_sorting_tutorial.html?embed=true#average-waveforms"></iframe>
+
+* * *
+
+```yaml section-metadata
+tab-label: Autocorrelograms
+```
+
+<iframe src="https://flatironinstitute.github.io/figpack/spike_sorting_tutorial.html?embed=true#autocorrelograms"></iframe>
+
+* * *
+
+```yaml section-metadata
+tab-label: Unit Locations
+```
+
+<iframe src="https://flatironinstitute.github.io/figpack/spike_sorting_tutorial.html?embed=true#unit-locations"></iframe>
+
+* * *
+
+```yaml section-metadata
+tab-label: Cross-Correlograms
+```
+
+<iframe src="https://flatironinstitute.github.io/figpack/spike_sorting_tutorial.html?embed=true#cross-correlograms"></iframe>
+
+
+* * *
+
+```yaml section-metadata
+tab-label: Sorting Curation
+```
+
+<iframe src="https://flatironinstitute.github.io/figpack/spike_sorting_tutorial.html?embed=true#sorting-curation"></iframe>
+
+---
+
+# Other miscellaneous views
+
+<iframe src="https://flatironinstitute.github.io/figpack/misc_tutorial.html?embed=false"></iframe>
+
+---
+
+# Figpack in the wild
+
+```yaml slide-metadata
+slide-type: box-layout-on-right
+```
+
+```yaml section-metadata
+font-size: large
+```
+
+A couple labs are already using Figpack, but I don't have permission to share links to their figures yet.
+
+* * *
+
+![alt text](./images/in-the-wild-1.png)
+
+* * *
+
+![alt text](./images/in-the-wild-2.png)
+
+---
+
+# Lifecycle Management of Figures
+
+```yaml slide-metadata
+slide-type: box-layout-on-right
+```
+
+```yaml section-metadata
+font-size: large
+```
+
+::: incremental
+* By default, uploaded figures expire after 24 hours.
+* Users can renew or pin figures to extend their lifetime.
+* Users can view and manage their uploaded figures and usage statistics through a web dashboard.
+* Admins can monitor overall system usage and manage pinned figures.
+* Users can configure their own cloud buckets for figure storage.
+:::
+
+* * *
+
+![Manage Figures](./images/manage-figures-screenshot.png)
+
+* * *
+
+![Manage Figure Screenshot](./images/manage-figure-screenshot.png)
+
+---
+
+# Creating Custom Views
+
+```yaml section-metadata
+font-size: large
+```
+
+Figpack is extensible through custom view types.
+
+Steps to create a new view:
+
+::: incremental
+* Create a new extension package or add to an existing one.
+* In Python, define a new view class inheriting from `figpack.FigpackView`.
+* On the frontend, implement rendering logic using JavaScript/TypeScript.
+:::
+
+AI Coding Companion can help generate boilerplate code - give it access to the docs!
+
+* * *
+
+<iframe src="https://flatironinstitute.github.io/figpack/developer_guide/creating_a_new_view.html?embed=true"></iframe>
+
+---
+
+# Summary
+
+```yaml section-metadata
+font-size: large
+```
+
+In a nutshell:
+* Figpack turns scientific data into shareable, self-contained HTML apps for interactive exploration.
+* Fast, scalable, and extensible — powered by Zarr
+* Works with timeseries, images, plots, and dashboards
+* Easily shared, archived, and extended
+* Enables open, reproducible, and interactive science

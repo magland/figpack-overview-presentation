@@ -1,29 +1,43 @@
 import numpy as np
 import figpack.views as fpv
-import figpack
+import figpack as fp
 import os
 import figpack_slides as fps
 
-def example_1_view_type(metadata: dict, markdown: str) -> figpack.FigpackView:
-    """Example custom view: damped sine wave."""
-    plot_color = metadata.get("plot-color", "#FF0000")
+def execute_view(metadata: dict, markdown: str) -> fp.FigpackView:
+    caption = metadata.get('caption', None)
+    caption_font_size = metadata.get('font-size', 24)
+    # Extract code from markdown - find content between ```python and ```
+    code_lines = []
+    in_code_block = False
+    for line in markdown.split('\n'):
+        if line.strip() == '```python':
+            in_code_block = True
+            continue
+        elif line.strip() == '```':
+            in_code_block = False
+            continue
+        if in_code_block:
+            code_lines.append(line)
+    
+    code = '\n'.join(code_lines)
+    
+    namespace = {}
+    
+    # Execute the code in the namespace
+    exec(code, namespace)
 
-    # Create a simple timeseries
-    graph = fpv.TimeseriesGraph(y_label="Amplitude")
+    # Get the view from the namespace
+    view = namespace['view']
 
-    # Generate data
-    t = np.linspace(0, 10, 500)
-    y = np.sin(2 * np.pi * t) * np.exp(-t / 5)
+    if caption is not None:
+        view = fpv.CaptionedView(
+            view=view,
+            caption=caption,
+            font_size=caption_font_size
+        )
 
-    # Add line series
-    graph.add_line_series(
-        name="Damped Sine",
-        t=t.astype(np.float32),
-        y=y.astype(np.float32),
-        color=plot_color
-    )
-
-    return graph
+    return view
 
 def main():
     with open("index.md", "r") as f:
@@ -35,7 +49,7 @@ def main():
         header_bg_color=theme_color,
         footer_bg_color=theme_color,
         custom_view_types={
-            'example-1': example_1_view_type
+            'execute-view': execute_view
         }
     )
 
