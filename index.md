@@ -131,7 +131,7 @@ Starts up a lightweight HTTP server to serve the files
 
 Optionally upload to cloud for sharing
 
-(This presentation is itself a Figpack figure!)
+(This presentation is itself a [Figpack figure](https://github.com/magland/figpack-overview-presentation)!)
 
 * * *
 
