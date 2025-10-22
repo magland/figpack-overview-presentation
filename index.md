@@ -69,7 +69,6 @@ t = np.linspace(0, 10, 1000)
 y = np.sin(2 * np.pi * t) * np.exp(-t / 3.2)
 view.add_line_series(name="sine wave", t=t, y=y, color="blue")
 view.show(
-    upload=True,
     open_in_browser=True,
     title="Quick Start Example"
 )
