@@ -2,7 +2,7 @@
 
 ```yaml slide-metadata
 slide-type: title
-subtitle: Overview and Demonstration for Datajoint, October 2025
+subtitle: Overview and Demonstration for DataJoint, October 2025
 author: Jeremy Magland, Center for Computational Mathematics, Flatiron Institute
 ```
 
@@ -37,7 +37,7 @@ The challenge:
 ::: incremental
 * Static plots are great for papers, but limited for exploring complex data.
 * Interactive plots often require Jupyter notebooks or servers.
-* Sharing rich visualizations is hard — dependencies, data, and formats rarely travel well.
+* Sharing rich visualizations can be difficult.
 * Large datasets overwhelm most browser-based tools.
 :::
 
