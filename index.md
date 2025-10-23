@@ -57,15 +57,16 @@ The Figpack solution:
 
 ```yaml slide-metadata
 elements:
-- type: shape
+- id: arrow1
+  type: shape
   shape: arrow
   direction: right
   position:
-    x: 897.0342205323194
-    y: 430.8555133079848
+    x: 950
+    y: 460
   size:
-    width: 100
-    height: 50
+    length: 100
+    thickness: 50
   style:
     stroke: blue
     strokeWidth: 2
