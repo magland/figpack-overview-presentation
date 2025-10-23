@@ -2,7 +2,7 @@
 
 ```yaml slide-metadata
 slide-type: title
-subtitle: Overview and Demonstration for DataJoint Team, October 2025
+subtitle: Overview and Demonstration, October 2025
 author: Jeremy Magland, Center for Computational Mathematics, Flatiron Institute
 ```
 
@@ -24,6 +24,7 @@ font-size: large
 * Performance at Scale - Efficient handling of large, multi-channel data
 * Figure Lifecycle - Uploading, sharing, and managing hosted figures
 * Extending Figpack - Creating your own custom views
+
 ---
 
 ```yaml section-metadata
@@ -53,6 +54,23 @@ The Figpack solution:
 ---
 
 # Creating a Figpack Figure
+
+```yaml slide-metadata
+elements:
+- type: shape
+  shape: arrow
+  direction: right
+  position:
+    x: 897.0342205323194
+    y: 430.8555133079848
+  size:
+    width: 100
+    height: 50
+  style:
+    stroke: blue
+    strokeWidth: 2
+    fill: lightblue
+```
 
 ```bash
 # Install figpack
