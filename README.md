@@ -29,3 +29,21 @@ Or in watch mode:
 ```bash
 ./dev.sh
 ```
+
+Open your browser to:
+
+```
+http://localhost:3000/
+```
+
+If you want to be able to edit the presentation content from within the browser, you can run:
+
+```bash
+./dev.sh --edit
+```
+
+and then add the edit=1 parameter to the URL, e.g.:
+
+```
+http://localhost:3000/?edit=1
+```

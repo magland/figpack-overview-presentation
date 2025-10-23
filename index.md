@@ -2,7 +2,7 @@
 
 ```yaml slide-metadata
 slide-type: title
-subtitle: Overview and Demonstration for DataJoint, October 2025
+subtitle: Overview and Demonstration for DataJoint Team, October 2025
 author: Jeremy Magland, Center for Computational Mathematics, Flatiron Institute
 ```
 
@@ -16,7 +16,6 @@ font-size: large
 
 **Purpose**: Introduce Figpack and attract early adopters and developers.
 
-::: incremental
 * Motivation — Why Figpack? - Limitations of existing tools
 * How Figpack Works - From code to self-contained HTML apps
 * Building a Figure - Create, view, and share visualizations
@@ -66,7 +65,7 @@ import figpack.views as fp
 
 view = fp.TimeseriesGraph(y_label="Signal")
 t = np.linspace(0, 10, 1000)
-y = np.sin(2 * np.pi * t) * np.exp(-t / 3.2)
+y = np.sin(2 * np.pi * t) * np.exp(-t / 3.5)
 view.add_line_series(name="sine wave", t=t, y=y, color="blue")
 view.show(
     open_in_browser=True,
@@ -84,7 +83,6 @@ view.show(
 ```
 
 Must set the `FIGPACK_API_KEY` environment variable.
-
 * * *
 
 ```yaml section-metadata
