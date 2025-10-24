@@ -225,7 +225,6 @@ Wrap a Pandas DataFrame for interactive viewing of tabular data.
 
 ---
 
-
 # Composing Views and Layouts
 
 ```yaml slide-metadata
@@ -369,7 +368,10 @@ tab-label: Sorting Curation
 
 # Other miscellaneous views
 
-<iframe src="https://flatironinstitute.github.io/figpack/misc_tutorial.html?embed=false"></iframe>
+<!-- For some crazy reason, if I use embed=false in the following, it causes the slides to shift somewhat to the left once the iframe loads.
+I have no idea why this is happening since iframes are supposed to be isolated from the parent document. I tried debugging with browser dev tools but couldn't figure it out. This happens for both Chrome and Firefox. -->
+
+<iframe src="https://flatironinstitute.github.io/figpack/misc_tutorial.html?embed=true"></iframe>
 
 ---
 
