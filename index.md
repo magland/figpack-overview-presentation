@@ -2,7 +2,7 @@
 
 ```yaml slide-metadata
 slide-type: title
-subtitle: Overview and Demonstration, October 2025
+subtitle: Overview and Demonstration, October 2025 (Updated November 2025)
 author: Jeremy Magland, Center for Computational Mathematics, Flatiron Institute
 ```
 
@@ -14,16 +14,14 @@ author: Jeremy Magland, Center for Computational Mathematics, Flatiron Institute
 font-size: large
 ```
 
-**Purpose**: Introduce Figpack and attract early adopters and developers.
-
-* Motivation — Why Figpack? - Limitations of existing tools
-* How Figpack Works - From code to self-contained HTML apps
-* Building a Figure - Create, view, and share visualizations
-* Examples and Layouts - Combine multiple views into dashboards
-* Domain Extensions - e.g. spike sorting with figpack_spike_sorting
-* Performance at Scale - Efficient handling of large, multi-channel data
-* Figure Lifecycle - Uploading, sharing, and managing hosted figures
-* Extending Figpack - Creating your own custom views
+* Why Figpack?
+* How Figpack Works
+* Building a Figure
+* Examples and Layouts
+* Domain Extensions
+* Examples in the Wild
+* Figure Lifecycle
+* Extending Figpack
 
 ---
 
@@ -152,12 +150,6 @@ Optionally upload to cloud for sharing
 * * *
 
 ![Create Figure Diagram](./images/create-figure-diagram.png)
-
----
-
-# Creating a Figure
-
-<iframe src="https://users.flatironinstitute.org/~magland/screencasts/presentations/figpack-presentation/figpack-upload-figure-screencast.webm"></iframe>
 
 ---
 
@@ -375,25 +367,15 @@ I have no idea why this is happening since iframes are supposed to be isolated f
 
 ---
 
-# Figpack in the wild
+# Example from Gillespie Lab: Synchronized Behavioral and Neural Data
 
-```yaml slide-metadata
-slide-type: box-layout-on-right
-```
+<iframe src="https://figures.figpack.org/figures/default/033ee89e558ba0955c09351c/index.html?embed=true"></iframe>
 
-```yaml section-metadata
-font-size: large
-```
+---
 
-A couple labs are already using Figpack, but I don't have permission to share links to their figures yet.
+# Example from Gillespie Lab: Efficient View of Electrophysiology Channels
 
-* * *
-
-![alt text](./images/in-the-wild-1.png)
-
-* * *
-
-![alt text](./images/in-the-wild-2.png)
+<iframe src="https://figures.figpack.org/figures/default/553173cf7d0c0e5a50818d86/index.html?embed=true"></iframe>
 
 ---
 
