@@ -22,6 +22,7 @@ font-size: large
 * Examples in the Wild
 * Figure Lifecycle
 * Extending Figpack
+* Long Term Archiving of Figures
 
 ---
 
@@ -190,6 +191,31 @@ font-size: large
 * * *
 
 <iframe src="https://flatironinstitute.github.io/figpack/basic_views_tutorial.html?embed=true#uniform-timeseries"></iframe>
+
+---
+
+# Zarr Format for Large Data + Hierarchical Downsampling
+
+```yaml section-metadata
+font-size: large
+```
+
+* Zarr is an open-source format for chunked, compressed, N-dimensional arrays.
+* Optimized for cloud storage and remote access.
+* Figpack uses Zarr to store figure data efficiently.
+* Hierarchical downsampling for Google-Maps-style navigation.
+
+* * *
+
+![Zarr Diagram](https://raw.githubusercontent.com/zarr-developers/community/main/logos/logo2.png)
+
+![Zarr Hierarchical Downsampling](./images/pyramid.png)
+
+---
+
+# Example from Gillespie Lab: Efficient View of Electrophysiology Channels
+
+<iframe src="https://figures.figpack.org/figures/default/553173cf7d0c0e5a50818d86/index.html?embed=true"></iframe>
 
 ---
 
@@ -373,12 +399,6 @@ I have no idea why this is happening since iframes are supposed to be isolated f
 
 ---
 
-# Example from Gillespie Lab: Efficient View of Electrophysiology Channels
-
-<iframe src="https://figures.figpack.org/figures/default/553173cf7d0c0e5a50818d86/index.html?embed=true"></iframe>
-
----
-
 # Lifecycle Management of Figures
 
 ```yaml slide-metadata
@@ -431,15 +451,37 @@ AI Coding Companion can help generate boilerplate code - give it access to the d
 
 ---
 
+# Long Term Archiving of Figures
+
+```yaml section-metadata
+font-size: large
+```
+
+* Complete figures can be saved as `.tar.gz`
+* Uploaded to repositories like Zenodo (Figshare?)
+* Viewed without download (streamed from archive) using figpack.org
+
+* * *
+
+<iframe src="https://flatironinstitute.github.io/figpack/zenodo_archival.html?embed=true"></iframe>
+
+---
+
 # Summary
 
 ```yaml section-metadata
 font-size: large
 ```
 
-In a nutshell:
 * Figpack turns scientific data into shareable, self-contained HTML apps for interactive exploration.
 * Fast, scalable, and extensible, powered by Zarr
 * Figures can be created, viewed, shared, managed, and archived
 * Extensible with domain-specific views and custom visualizations
-* Enables open, reproducible, and interactive science
+* Enables low friction, open, reproducible, and interactive science
+
+**Future Directions**
+* More domain-specific extensions (e.g., synchronized video + neural data + behavior)
+* Integration with DataJoint and other data management systems
+
+**Thank You!**
+* Anna Gillespie and Gabby Shvartsman (Gillespie Lab) for feedback and motivating examples
