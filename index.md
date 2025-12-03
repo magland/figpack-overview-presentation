@@ -2,7 +2,7 @@
 
 ```yaml slide-metadata
 slide-type: title
-subtitle: Overview and Demonstration, October 2025 (Updated November 2025)
+subtitle: Overview and Demonstration, December 2025
 author: Jeremy Magland, Center for Computational Mathematics, Flatiron Institute
 ```
 
